@@ -1,0 +1,10 @@
+Click==7.0
+dlib==19.18.0
+face-recognition==1.2.3
+face-recognition-models==0.3.0
+imutils==0.5.3
+numpy==1.17.3
+picamera==1.13
+Pillow==6.2.1
+pkg-resources==0.0.0
+cv2==4.1.1
