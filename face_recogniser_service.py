@@ -46,3 +46,4 @@ def identify_face_from_encoding(encoding_to_compare, threshold, stored_employee_
     if float(minimum[1]) <= threshold:
         return True, minimum[0], minimum[1]
     return False, 'Unknown', minimum[1]
+    
