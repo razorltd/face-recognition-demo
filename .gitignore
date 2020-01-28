@@ -1,6 +1,6 @@
 # Image files
 employee_directory/
-employee_encodings.csv
+data/
 
 # Caffe files
 caffe/

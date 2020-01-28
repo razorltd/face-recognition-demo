@@ -15,7 +15,7 @@ process_this_frame = True
 # load detection model from disk
 modelPath = "/home/pi/opencv/data/haarcascades/haarcascade_frontalface_default.xml"
 detection_model = cv2.CascadeClassifier(modelPath)
-stored_employee_encodings = np.genfromtxt('employee_encodings.csv', dtype=str, delimiter=',')
+stored_employee_encodings = np.genfromtxt('data/employee_encodings.csv', dtype=str, delimiter=',')
 
 video_capture = VideoStream(src=0).start()
 time.sleep(1.0)

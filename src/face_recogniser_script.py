@@ -12,12 +12,12 @@ face_names = []
 count = 0
 
 # load detection model
-prototxtPath = "./caffe/deploy.prototxt"
-modelPath = "./caffe/res10_300x300_ssd_iter_140000.caffemodel"
+prototxtPath = "../caffe/deploy.prototxt"
+modelPath = "../caffe/res10_300x300_ssd_iter_140000.caffemodel"
 detection_model = cv2.dnn.readNetFromCaffe(prototxtPath, modelPath)
 
 #Load stored encodings
-stored_employee_encodings = np.genfromtxt('employee_encodings.csv', dtype=str, delimiter=',')
+stored_employee_encodings = np.genfromtxt('data/employee_encodings.csv', dtype=str, delimiter=',')
 
 video_capture = VideoStream(src=0).start()
 time.sleep(1.0)
