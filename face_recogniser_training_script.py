@@ -10,9 +10,11 @@ detection_model = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
 
 employee_encodings = []
 employee_directory_path = "./employee_directory"
+# Get employee folders
 employee_folders = os.listdir(employee_directory_path)
 for employee_folder in employee_folders:
     employee_folder_path = os.path.join(employee_directory_path, employee_folder)
+    # Get all images of employee
     images = os.listdir(employee_folder_path)
     for image_name in images:
         image_path = os.path.join(employee_folder_path, image_name)

@@ -36,13 +36,18 @@ def encode_faces_from_locations(frame, locations):
 def identify_face_from_encoding(encoding_to_compare, threshold, stored_employee_encodings):
     encodings = stored_employee_encodings[:, 1:].astype(float)
     face_distances = face_recognition.face_distance(encodings, encoding_to_compare)
+    # Create an array containing all the employee images and their corresponding distance
     encoding_distances = np.c_[ stored_employee_encodings[:, 0], face_distances ]
+    # Get all the possible employee matches
     employees = np.unique(encoding_distances[:, 0])
+    # Calculate the mean distance for each employee
     mean_distances = [np.mean(encoding_distances[np.where(encoding_distances[:, 0] == employee)][:, 1].astype(float))
                                for employee in employees]
     employees_avg = np.c_[ employees, mean_distances ]
 
+    # Get the minimum average distance
     minimum = employees_avg[np.argmin(employees_avg[:, 1])]
+    # If the minimum distance is within the desired threshold then return the identified employee
     if float(minimum[1]) <= threshold:
         return True, minimum[0], minimum[1]
     return False, 'Unknown', minimum[1]

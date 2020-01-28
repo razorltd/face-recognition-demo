@@ -1,5 +1,11 @@
 # Image files
 employee_directory/
+employee_encodings.csv
+
+# Caffe files
+caffe/
+
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

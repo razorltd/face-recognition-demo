@@ -11,10 +11,12 @@ face_encodings = []
 face_names = []
 count = 0
 
-# load detection model from disk
+# load detection model
 prototxtPath = "./caffe/deploy.prototxt"
 modelPath = "./caffe/res10_300x300_ssd_iter_140000.caffemodel"
 detection_model = cv2.dnn.readNetFromCaffe(prototxtPath, modelPath)
+
+#Load stored encodings
 stored_employee_encodings = np.genfromtxt('employee_encodings.csv', dtype=str, delimiter=',')
 
 video_capture = VideoStream(src=0).start()
@@ -23,8 +25,6 @@ time.sleep(1.0)
 while True:
     # Grab a single frame of video
     frame = video_capture.read()
-    h, w = frame.shape[:2]
-    frame = imutils.resize(frame, width=1000)
     resized_frame, blob, h, w = normalize_frame(frame)
     
     if count == 3:
@@ -44,13 +44,14 @@ while True:
         left = int(left * w)
         right = int(right * w)
         
+        # If we know who it is, draw in blue, else draw in red
         colour = (0, 255, 0)
         if not recognised:
             colour = (0, 0, 255)
             
         cv2.rectangle(frame, (left, top), (right, bottom), colour, 2)
         cv2.rectangle(frame, (left, bottom), (right, bottom - 30), colour, cv2.FILLED)
-        font = cv2.FONT_HERSHEY_DUPLEX
+        font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(frame, name, (left + 6, bottom - 6), font, (right - left) / 250, (255, 255, 255), 1)
         
     cv2.imshow('Video', frame)
