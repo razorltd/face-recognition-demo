@@ -20,15 +20,15 @@ stored_employee_encodings = np.genfromtxt('data/employee_encodings.csv', dtype=s
 video_capture = VideoStream(src=0).start()
 time.sleep(1.0)
 
-fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-writer = None
-(h, w) = (None, None)
+#fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+#writer = None
+#(h, w) = (None, None)
 
 while True:
     # Grab a single frame of video
     frame = video_capture.read()
     h, w = frame.shape[:2]
-    frame_small = imutils.resize(frame, width=int(w/4))
+    frame_small = imutils.resize(frame, width=int(w/2))
     
     if process_this_frame:
         face_locations = detect_faces_in_frame_cascade(detection_model, frame_small)
@@ -36,14 +36,13 @@ while True:
         rgb_frame = convert_to_rgb(frame_small)
         face_encodings = encode_faces_from_locations(rgb_frame, face_locations)
         face_names = [identify_face_from_encoding(encoding, threshold, stored_employee_encodings) for encoding in face_encodings]
-    
     #process_this_frame = not process_this_frame
     
     for (top, right, bottom, left), (recognised, name, certainty) in zip(face_locations, face_names):
-        top = int(top * 4)
-        bottom = int(bottom * 4)
-        left = int(left * 4)
-        right = int(right * 4)
+        top = int(top * 2)
+        bottom = int(bottom * 2)
+        left = int(left * 2)
+        right = int(right * 2)
         
         colour = (0, 255, 0)
         if not recognised:
@@ -56,16 +55,14 @@ while True:
         
     cv2.imshow('Video', frame)
 
-    if writer is None:
-		# store the image dimensions, initialize the video writer,
-		# and construct the zeros array
-	    (h, w) = frame.shape[:2]
-	    writer = cv2.VideoWriter("example_2.avi", fourcc, 10, (w, h), True)
-    writer.write(frame)
+    #if writer is None:
+	    #(h, w) = frame.shape[:2]
+	    #writer = cv2.VideoWriter("example_2.avi", fourcc, 10, (w, h), True)
+    #writer.write(frame)
         
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cv2.destroyAllWindows()
 video_capture.stop()
-writer.release()
+#writer.release()
