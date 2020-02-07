@@ -29,6 +29,10 @@ def detect_faces_in_frame_cascade(detection_model, blob):
     face_locations = [(y, x+w, y+h, x) for (x, y, w, h) in faces]
     return np.array(face_locations)
 
+def detect_faces_in_frame_fr(frame):
+    face_locations = face_recognition.face_locations(frame)
+    return face_locations
+
 def encode_faces_from_locations(frame, locations):
     encodings = face_recognition.face_encodings(frame, locations)
     return encodings

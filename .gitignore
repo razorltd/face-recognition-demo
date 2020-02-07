@@ -6,6 +6,7 @@ data/
 caffe/
 
 .vscode/
+.pyprof
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
